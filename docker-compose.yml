@@ -1,0 +1,18 @@
+version: '3.1'
+
+services:
+  mysql-flight-db:
+    image: mysql:latest
+    container_name: mysql-flight-container
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: your_root_password
+      MYSQL_DATABASE: flight
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: 123456789
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:

@@ -1,10 +1,10 @@
 package com.example.springbootflightsearchapi.service;
 
+import com.example.springbootflightsearchapi.exception.AirportNotFoundException;
 import com.example.springbootflightsearchapi.model.Airport;
 import com.example.springbootflightsearchapi.repository.AirportRepository;
 import com.example.springbootflightsearchapi.request.CreateAirportRequest;
 import com.example.springbootflightsearchapi.response.CreateAirportResponse;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,11 +23,11 @@ public class AirportService {
     }
 
     public Airport getAirport(Long id) {
-        return airportRepository.getAirportById(id).orElse(null);
+        return airportRepository.getAirportById(id).orElseThrow(() -> new AirportNotFoundException("Airport with ID " + id + " not found"));
     }
 
     public Airport updateAirport(Long id, CreateAirportRequest createAirportRequest) {
-        var airport = airportRepository.getAirportById(id).orElse(null);
+        var airport = airportRepository.getAirportById(id).orElseThrow(() -> new AirportNotFoundException("Airport with ID " + id + " not found"));
         airport.setCityName(createAirportRequest.getCityName());
         return airportRepository.save(airport);
     }

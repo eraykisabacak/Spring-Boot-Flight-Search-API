@@ -7,7 +7,6 @@ import com.example.springbootflightsearchapi.service.AirportService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +26,7 @@ public class AirportController {
     }
 
     @GetMapping
-    public List<GetAirportResponse> getAirports(){
+    public List<GetAirportResponse> getAllAirport(){
         List<Airport> airports = airportService.getAirports();
         return airports.stream().map(airport -> {
             return new GetAirportResponse().builder().cityName(airport.getCityName()).id(airport.getId()).build();
@@ -49,12 +48,13 @@ public class AirportController {
     @PostMapping
     public ResponseEntity<String> createAirport(@Valid @RequestBody CreateAirportRequest createAirportRequest){
         airportService.createAirport(createAirportRequest);
-        return ResponseEntity.ok().body("OK");
+        return ResponseEntity.status(201).build();
     }
 
     @DeleteMapping("/{id}")
-    public void createAirport(@PathVariable String id){
+    public ResponseEntity.HeadersBuilder<?> createAirport(@PathVariable String id){
         airportService.deleteAirport(Long.parseLong(id));
+        return ResponseEntity.noContent();
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

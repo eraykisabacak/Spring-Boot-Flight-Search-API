@@ -1,14 +1,26 @@
 package com.example.springbootflightsearchapi.controller;
 
+import com.example.springbootflightsearchapi.exception.FlightNotFoundException;
+import com.example.springbootflightsearchapi.model.Flight;
 import com.example.springbootflightsearchapi.request.CreateFlightRequest;
+import com.example.springbootflightsearchapi.request.UpdateFlightRequest;
+import com.example.springbootflightsearchapi.response.ApiResponse;
 import com.example.springbootflightsearchapi.response.GetFlightResponse;
+import com.example.springbootflightsearchapi.response.ResponseHelper;
 import com.example.springbootflightsearchapi.service.FlightService;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+@Slf4j
 @RestController
 @RequestMapping("/flight")
 public class FlightController {
@@ -20,9 +32,14 @@ public class FlightController {
     }
 
     @GetMapping
-    public List<GetFlightResponse> getAllFlight(){
+    public ResponseEntity<ApiResponse<List<GetFlightResponse>>> getFlights(){
+        log.debug("[{}][getFlights] " , this.getClass().getSimpleName());
         var flights = flightService.getFlights();
-        return flights.stream().map(flight -> {
+        if(flights.isEmpty()){
+            throw new FlightNotFoundException("Flight not found");
+        }
+        log.debug("[{}][getFlights] -> response {} " , this.getClass().getSimpleName(), flights);
+        List<GetFlightResponse> flightsList = flights.stream().map(flight -> {
             return new GetFlightResponse().builder()
                     .id(flight.getId())
                     .price(flight.getPrice())
@@ -32,12 +49,16 @@ public class FlightController {
                     .departureDate(flight.getDepartureDate())
                     .build();
         }).toList();
+
+        return ResponseHelper.apiResponse(HttpStatus.OK,"Flights dataları çekildi",flightsList);
     }
 
     @GetMapping("/{id}")
-    public GetFlightResponse getFlight(@PathVariable Long id){
+    public ResponseEntity<ApiResponse<GetFlightResponse>> getFlight(@PathVariable Long id){
+        log.debug("[{}][getFlight] " , this.getClass().getSimpleName());
         var flight = flightService.getFlight(id);
-        return new GetFlightResponse().builder()
+        log.debug("[{}][getFlight] -> response {} " , this.getClass().getSimpleName(), flight);
+        GetFlightResponse getFlightResponse = new GetFlightResponse().builder()
                 .id(flight.getId())
                 .price(flight.getPrice())
                 .arrivalAirport(flight.getArrivalAirport())
@@ -45,16 +66,43 @@ public class FlightController {
                 .returnDate(flight.getReturnDate())
                 .departureDate(flight.getDepartureDate())
                 .build();
+
+        return ResponseHelper.apiResponse(HttpStatus.OK,"Flight datası çekildi",getFlightResponse);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity.HeadersBuilder<?> deleteFlight(@PathVariable Long id){
-        // TODO
-        return ResponseEntity.noContent();
+    public ResponseEntity deleteFlight(@PathVariable Long id){
+        log.debug("[{}][deleteFlight] " , this.getClass().getSimpleName());
+        flightService.deleteFlight(id);
+        return ResponseEntity.status(204).build();
     }
 
     @PostMapping
-    public void createFlight(@Valid @RequestBody CreateFlightRequest createFlightRequest){
-        // TODO
+    public ResponseEntity<ApiResponse<Flight>> createFlight(@Valid @RequestBody CreateFlightRequest createFlightRequest){
+        log.debug("[{}][createFlight] " , this.getClass().getSimpleName());
+        Flight flight = flightService.createFlight(createFlightRequest);
+        log.debug("[{}][createFlight] -> response {} " , this.getClass().getSimpleName(), flight);
+        return ResponseHelper.apiResponse(HttpStatus.CREATED,"Flight kayıt edildi", flight );
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiResponse<Flight>> updateFlight(@PathVariable Long id, @Valid @RequestBody UpdateFlightRequest updateFlightRequest){
+        log.debug("[{}][updateFlight] " , this.getClass().getSimpleName());
+        Flight flight = flightService.updateFlight(updateFlightRequest , id);
+        log.debug("[{}][updateFlight] -> response {} " , this.getClass().getSimpleName(), flight);
+        return ResponseHelper.apiResponse(HttpStatus.OK,"Flight güncellendi", flight );
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Map<String, String> handleValidationExceptions(
+            MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+        return errors;
     }
 }

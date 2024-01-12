@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -18,11 +17,11 @@ public class Flight {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "departure_airport_id")
     private Airport departureAirport;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "arrival_airport_id")
     private Airport arrivalAirport;
 

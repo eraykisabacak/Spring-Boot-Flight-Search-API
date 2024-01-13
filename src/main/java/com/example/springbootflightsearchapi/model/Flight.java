@@ -28,4 +28,8 @@ public class Flight {
     private BigDecimal price;
     private LocalDate departureDate;
     private LocalDate returnDate;
+
+    @ManyToOne
+    @JoinColumn(name = "return_flight_id")
+    private Flight returnFlight;
 }

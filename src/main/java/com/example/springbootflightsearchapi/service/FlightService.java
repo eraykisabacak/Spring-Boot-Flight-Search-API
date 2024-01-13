@@ -5,6 +5,7 @@ import com.example.springbootflightsearchapi.model.Airport;
 import com.example.springbootflightsearchapi.model.Flight;
 import com.example.springbootflightsearchapi.repository.FlightRepository;
 import com.example.springbootflightsearchapi.request.CreateFlightRequest;
+import com.example.springbootflightsearchapi.request.SearchFlightRequest;
 import com.example.springbootflightsearchapi.request.UpdateFlightRequest;
 import org.springframework.stereotype.Service;
 
@@ -44,7 +45,19 @@ public class FlightService {
         flight.setArrivalAirport(arrivalAirport);
         flight.setDepartureAirport(departureAirport);
         flight.setDepartureDate(createFlightRequest.getDepartureDate());
-        flight.setReturnDate(createFlightRequest.getReturnDate());
+        if(createFlightRequest.getReturnDate() != null){
+            flight.setReturnDate(createFlightRequest.getReturnDate());
+
+            Flight returnFlight = new Flight();
+            returnFlight.setDepartureAirport(departureAirport);
+            returnFlight.setArrivalAirport(arrivalAirport);
+            returnFlight.setDepartureDate(createFlightRequest.getReturnDate());
+            returnFlight.setPrice(createFlightRequest.getPrice());
+            flightRepository.save(returnFlight);
+
+            flight.setReturnFlight(returnFlight);
+
+        }
         flightRepository.save(flight);
         return flight;
     }
@@ -71,5 +84,22 @@ public class FlightService {
         Optional.ofNullable(updateFlightRequest.getPrice()).ifPresent(flight::setPrice);
         Optional.ofNullable(updateFlightRequest.getDepartureDate()).ifPresent(flight::setDepartureDate);
         Optional.ofNullable(updateFlightRequest.getReturnDate()).ifPresent(flight::setReturnDate);
+    }
+
+    public List<Flight> searchFlights(SearchFlightRequest searchFlightRequest) {
+        Airport arrivalAirport = airportService.getAirport(searchFlightRequest.getArrivalAirportId());
+        Airport departureAirport = airportService.getAirport(searchFlightRequest.getDepartureAirportId());
+
+        if(searchFlightRequest.getReturnDate() != null){
+            return flightRepository.findAllByDepartureAirportAndArrivalAirportAndDepartureDateAndReturnDate(
+                    departureAirport,
+                    arrivalAirport,
+                    searchFlightRequest.getDepartureDate(),
+                    searchFlightRequest.getReturnDate());
+        }
+        return flightRepository.findAllByDepartureAirportAndArrivalAirportAndDepartureDate(
+                    departureAirport,
+                    arrivalAirport,
+                    searchFlightRequest.getDepartureDate());
     }
 }

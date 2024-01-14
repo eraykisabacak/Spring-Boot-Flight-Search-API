@@ -8,6 +8,7 @@ import com.example.springbootflightsearchapi.response.CreateAirportResponse;
 import com.example.springbootflightsearchapi.response.GetAirportResponse;
 import com.example.springbootflightsearchapi.response.ResponseHelper;
 import com.example.springbootflightsearchapi.service.AirportService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,7 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping("/airport")
+@SecurityRequirement(name = "bearerAuth")
 public class AirportController {
 
     private final AirportService airportService;

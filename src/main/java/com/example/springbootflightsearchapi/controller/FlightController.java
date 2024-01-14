@@ -9,6 +9,7 @@ import com.example.springbootflightsearchapi.response.ApiResponse;
 import com.example.springbootflightsearchapi.response.GetFlightResponse;
 import com.example.springbootflightsearchapi.response.ResponseHelper;
 import com.example.springbootflightsearchapi.service.FlightService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,7 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping("/flight")
+@SecurityRequirement(name = "bearerAuth")
 public class FlightController {
 
     private final FlightService flightService;
@@ -95,7 +97,7 @@ public class FlightController {
         return ResponseHelper.apiResponse(HttpStatus.OK,"Flight güncellendi", flight );
     }
 
-    @GetMapping("/search")
+    @PostMapping("/search")
     public ResponseEntity<ApiResponse<List<Flight>>> search(@Valid @RequestBody SearchFlightRequest searchFlightRequest){
         List<Flight> flights = flightService.searchFlights(searchFlightRequest);
         return ResponseHelper.apiResponse(HttpStatus.OK,"Arama sonuçları", flights );

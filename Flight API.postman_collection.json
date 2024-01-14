@@ -1,0 +1,487 @@
+{
+	"info": {
+		"_postman_id": "bc55b963-654f-4236-b484-d289718bc577",
+		"name": "Flight API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Airport",
+			"item": [
+				{
+					"name": "localhost:8080/airport",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmF5IiwiaWF0IjoxNzA1MTY0MjIzLCJleHAiOjE3MDUxNjQzNDN9.ZyllMjd6HAIv4LUr3cbNiMF_7MNsCXj8KCZ4Omk-By8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/airport",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"airport"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/airport/1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmF5IiwiaWF0IjoxNzA1MTY0MzY0LCJleHAiOjE3MDUxNjQ0ODR9.-XNPgdBbNoABcXEpBdmnvMrWQkNHDuiCnlCzju9QoAU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/airport/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"airport",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/airport",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmF5IiwiaWF0IjoxNzA1MTY0MzY0LCJleHAiOjE3MDUxNjQ0ODR9.-XNPgdBbNoABcXEpBdmnvMrWQkNHDuiCnlCzju9QoAU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cityName\":\"New Havalimanı\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/airport",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"airport"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/airport/1",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cityName\":\"Ankara esenboğa\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/airport/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"airport",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/airport/3",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmF5IiwiaWF0IjoxNzA1MTY0MzY0LCJleHAiOjE3MDUxNjQ0ODR9.-XNPgdBbNoABcXEpBdmnvMrWQkNHDuiCnlCzju9QoAU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/airport/4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"airport",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Flight",
+			"item": [
+				{
+					"name": "localhost:8080/flight",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmF5IiwiaWF0IjoxNzA1MjQyODAxLCJleHAiOjE3MDUyNDI5MjF9.CNhYkbKAjqLV3El2RUkOgRRhZqK9FzcpNITjaFztuNM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/flight",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"flight"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/flight/1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmF5IiwiaWF0IjoxNzA1MjI0MTYxLCJleHAiOjE3MDUyMjQyODF9._6tm_MwWSly70W66xMCHBtTnLOILW_XHTtCXrODCVKc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/flight/12",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"flight",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/flight",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmF5IiwiaWF0IjoxNzA1MTY0MzY0LCJleHAiOjE3MDUxNjQ0ODR9.-XNPgdBbNoABcXEpBdmnvMrWQkNHDuiCnlCzju9QoAU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"arrivalAirportId\":3,\n    \"departureAirportId\":5,\n    \"price\":\"400\",\n    \"departureDate\":\"2024-01-13\",\n    \"returnDate\":\"2024-01-14\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/flight",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"flight"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/flight/1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmF5IiwiaWF0IjoxNzA1MTY0MzY0LCJleHAiOjE3MDUxNjQ0ODR9.-XNPgdBbNoABcXEpBdmnvMrWQkNHDuiCnlCzju9QoAU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/flight/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"flight",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/flight/1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmF5IiwiaWF0IjoxNzA1MTY0MzY0LCJleHAiOjE3MDUxNjQ0ODR9.-XNPgdBbNoABcXEpBdmnvMrWQkNHDuiCnlCzju9QoAU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"arrivalAirportId\":5,\n    \"departureAirportId\":3,\n    \"returnDate\":\"2024-01-03\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/flight/12",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"flight",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/flight/search",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmF5IiwiaWF0IjoxNzA1MjQxOTY1LCJleHAiOjE3MDUyNDIwODV9.1RL1PPZpdSwu7DV17p6EmPbrDKK5lubUwwc4UiRaZJY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"arrivalAirportId\":3,\n    \"departureAirportId\":5,\n    \"departureDate\":\"2024-01-13\",\n    \"returnDate\": \"2024-01-14\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/flight/search",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"flight",
+								"search"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "localhost:8080/auth/register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"eray\",\n    \"email\":\"eray@eray.com\",\n    \"username\":\"eray\",\n    \"password\":\"123456\",\n    \"authorities\":[\"ROLE_USER\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/auth/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/auth/login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"eray\",\n    \"password\":\"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/auth/logout",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmF5IiwiaWF0IjoxNzA1MTg2NTAzLCJleHAiOjE3MDUxODY2MjN9.DhBuVFurMRoCJNH0C00-pEN-sePoBnVmzBDEQ-WIlUo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/auth/logout",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
